@@ -106,7 +106,7 @@ class User
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->bindValue(':name', $name, PDO::PARAM_STR);
         $stmt->bindValue(':first_name', $first_name, PDO::PARAM_STR);
-        $stmt->bindValue(':last_name', $last_name, PDO::PARAM_INT);
+        $stmt->bindValue(':last_name', $last_name, PDO::PARAM_STR);
         $stmt->bindValue(':age', $age, PDO::PARAM_STR);
         $stmt->bindValue(':company', $company, PDO::PARAM_STR);
         $stmt->bindValue(':email', $email, PDO::PARAM_STR);
