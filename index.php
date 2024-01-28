@@ -27,6 +27,7 @@ $router
     ->post('/addtocart', [Controller::class, 'addtocart'])
     ->get('/cart', [Controller::class, 'cart'])
     ->post('/cart', [Controller::class, 'cart'])
+    ->post('/update-cart', [Controller::class, 'update_cart'])
     ->get('/clear-cart', [Controller::class, 'clearCart'])
 
     ->get('/checkout', [Controller::class, 'checkout'])

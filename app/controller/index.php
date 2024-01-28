@@ -260,12 +260,25 @@ class Controller
     public function cart()
     {
         session_start();
-        // echo '<br/>';
-        // foreach ($_SESSION['cart'] as $item) {
-        //     echo implode(', ', $item) . '<br/>';
-        // }
-        // echo '<br/>';
+
         $this->importHeader();
+        $cartItems = $_SESSION['cart'] ?? [];
+        // var_dump($cartItems);
+        include "../project_php2_6/app/view/cart.php";
+        $this->importFooter();
+    }
+    public function update_cart()
+    {
+        session_start();
+        $this->importHeader();
+        foreach ($_POST['quantity'] as $productId => $newQuantity) {
+            // Chỉ cập nhật số lượng nếu số lượng mới hợp lệ (ví dụ: lớn hơn 0)
+            if ($newQuantity > 0) {
+                // Cập nhật số lượng mới cho sản phẩm có $productId trong mảng $_SESSION['cart']
+                $_SESSION['cart'][$productId][1] = $newQuantity;
+            }
+        }
+
         $cartItems = $_SESSION['cart'] ?? [];
         // var_dump($cartItems);
         include "../project_php2_6/app/view/cart.php";
