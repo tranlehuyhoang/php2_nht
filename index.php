@@ -35,7 +35,7 @@ $router
     ->get('/checkout', [Controller::class, 'checkout'])
     ->post('/checkout', [Controller::class, 'userOrder'])
 
-    ->get('/order_detail/{id}', [Controller::class, 'orderDetail'])
+    ->get('/order_detail', [Controller::class, 'orderDetail'])
     ->post('/order_detail/{id}', [Controller::class, 'orderDetail'])
     //==========================================================================
     //=================================ADMIN====================================

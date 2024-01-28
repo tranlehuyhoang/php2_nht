@@ -333,11 +333,12 @@ class Controller
         $country = $_POST['country'];
         $postal_code = $_POST['postal_code'];
         $payment = $_POST['payment'];
+        $total_price = $_POST['total_price'];
         // $total_price = $_SESSION['total_price']; // Lấy từ session hoặc tính toán lại tùy vào cách bạn thực hiện
 
         // Thực hiện lưu vào database
         $checkoutModel = new Checkout();
-        $checkoutModel->saveOrder($email, $first_name, $last_name, $company, $address, $phone, $city, $country, $postal_code, $payment);
+        $checkoutModel->saveOrder($email, $first_name, $last_name, $company, $address, $phone, $city, $country, $postal_code, $payment, $total_price);
     }
 
     public function showOrderUser()
@@ -360,14 +361,23 @@ class Controller
         }
     }
 
-    public function orderDetail($id)
+    public function orderDetail()
     {
 
+        session_start();
 
-        $this->importHeader();
+        // Kiểm tra xem có session người dùng hay không
+        // Lấy danh sách đơn hàng của người dùng từ database
         $orderModel = new Order();
-        $order = $orderModel->getOrderById($id);
+        $order = $orderModel->getOrderById($_GET['id']);
+        $orderDetails = $orderModel->getOrderDetailsByOrderId($_GET['id']);
+
+
+
+        // Hiển thị trang "Tài Khoản" với thông tin đơn hàng
+        $this->importHeader();
         include "../project_php2_6/app/view/order_detail.php";
+
         $this->importFooter();
     }
 

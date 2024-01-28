@@ -62,31 +62,36 @@
                             <table class="account__table">
                                 <thead class="account__table--header">
                                     <tr class="account__table--header__child">
-                                        <th class="account__table--header__child--items">#</th>
                                         <th class="account__table--header__child--items">ID</th>
-                                        <th class="account__table--header__child--items">Image</th>
-                                        <th class="account__table--header__child--items">Name</th>
-                                        <th class="account__table--header__child--items">Price</th>
-                                        <th class="account__table--header__child--items">Quantity</th>
-                                        <th class="account__table--header__child--items">Date Created</th>
+                                        <th class="account__table--header__child--items">Email</th>
+                                        <th class="account__table--header__child--items">Total Price</th>
+                                        <th class="account__table--header__child--items">Payment</th>
+                                        <th class="account__table--header__child--items">Status</th>
+                                        <th class="account__table--header__child--items">Time</th>
                                         <th class="account__table--header__child--items">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody class="account__table--body mobile__none">
                                     <?php
                                     $stt = 1;
-                                    foreach ($products as $product) :
+                                    foreach ($orders as $order) :
                                     ?>
                                         <tr class="account__table--body__child">
-                                            <td class="account__table--body__child--items">#<?php echo $stt; ?></td>
-                                            <td class="account__table--body__child--items"><?php echo $product['id']; ?></td>
-                                            <td class="account__table--body__child--items"><img class="" src="/public/uploads/<?php echo $product['image']; ?>" alt="product-img" width="30px"></td>
-                                            <td class="account__table--body__child--items"><?php echo $product["name"] ?></td>
-                                            <td class="account__table--body__child--items">$<?php echo number_format($product["price"]) ?></td>
-                                            <td class="account__table--body__child--items"><?php echo $product["quantity"] ?></td>
-                                            <td class="account__table--body__child--items"><?php echo $product["date_created"] ?></td>
+                                            <td class="account__table--body__child--items"><?php echo $order['id']; ?></td>
+                                            <td class="account__table--body__child--items"><?php echo $order['email']; ?>
+                                            </td>
+
+
                                             <td class="account__table--body__child--items">
-                                                <button>Edit</button>
+                                                $<?php echo number_format($order['total_price']); ?></td>
+                                            <td class="account__table--body__child--items"><?php echo $order['payment']; ?>
+                                            </td>
+                                            <td class="account__table--body__child--items"><?php echo $order['status']; ?>
+                                            </td>
+                                            <td class="account__table--body__child--items"><?php echo $order['time']; ?>
+                                            </td>
+                                            <td class="account__table--body__child--items">
+                                                <button><a href="/order_detail?id=<?php echo $order['id']; ?>">View</a></button>
                                                 <button>Delete</button>
                                             </td>
                                         </tr>
@@ -98,7 +103,7 @@
                                 <tbody class="account__table--body mobile__block">
                                     <?php
                                     $stt = 1;
-                                    foreach ($products as $product) :
+                                    foreach ($orders as $order) :
                                     ?>
                                         <tr class="account__table--body__child">
                                             <td class="account__table--body__child--items">
@@ -107,32 +112,64 @@
                                             </td>
                                             <td class="account__table--body__child--items">
                                                 <strong>ID</strong>
-                                                <span><?php echo $product['id']; ?></span>
+                                                <span><?php echo $order['id']; ?></span>
                                             </td>
                                             <td class="account__table--body__child--items">
-                                                <strong>Image</strong>
-                                                <span><img class="" src="public/uploads/<?php echo $product['image']; ?>" alt="product-img" width="30px"></span>
+                                                <strong>Email</strong>
+                                                <span><?php echo $order['email']; ?></span>
                                             </td>
                                             <td class="account__table--body__child--items">
-                                                <strong>Name</strong>
-                                                <span><?php echo $product["name"] ?></span>
+                                                <strong>First Name</strong>
+                                                <span><?php echo $order['first_name']; ?></span>
                                             </td>
                                             <td class="account__table--body__child--items">
-                                                <strong>Price</strong>
-                                                <span>$<?php echo number_format($product["price"]) ?></span>
+                                                <strong>Last Name</strong>
+                                                <span><?php echo $order['last_name']; ?></span>
                                             </td>
                                             <td class="account__table--body__child--items">
-                                                <strong>Quantity</strong>
-                                                <span><?php echo $product["quantity"] ?></span>
+                                                <strong>Company</strong>
+                                                <span><?php echo $order['company']; ?></span>
                                             </td>
                                             <td class="account__table--body__child--items">
-                                                <strong>Date Created</strong>
-                                                <span><?php echo $product["date_created"] ?></span>
+                                                <strong>Address</strong>
+                                                <span><?php echo $order['address']; ?></span>
+                                            </td>
+                                            <td class="account__table--body__child--items">
+                                                <strong>Phone</strong>
+                                                <span><?php echo $order['phone']; ?></span>
+                                            </td>
+                                            <td class="account__table--body__child--items">
+                                                <strong>City</strong>
+                                                <span><?php echo $order['city']; ?></span>
+                                            </td>
+                                            <td class="account__table--body__child--items">
+                                                <strong>Country</strong>
+                                                <span><?php echo $order['country']; ?></span>
+                                            </td>
+                                            <td class="account__table--body__child--items">
+                                                <strong>Postal Code</strong>
+                                                <span><?php echo $order['postal_code']; ?></span>
+                                            </td>
+                                            <td class="account__table--body__child--items">
+                                                <strong>Total Price</strong>
+                                                <span>$<?php echo number_format($order['total_price']); ?></span>
+                                            </td>
+                                            <td class="account__table--body__child--items">
+                                                <strong>Payment</strong>
+                                                <span><?php echo $order['payment']; ?></span>
+                                            </td>
+                                            <td class="account__table--body__child--items">
+                                                <strong>Status</strong>
+                                                <span><?php echo $order['status']; ?></span>
+                                            </td>
+                                            <td class="account__table--body__child--items">
+                                                <strong>Time</strong>
+                                                <span><?php echo $order['time']; ?></span>
                                             </td>
                                             <td class="account__table--body__child--items">
                                                 <strong>Action</strong>
                                                 <span>
-                                                    <button>Edit</button>
+                                                    <button><a href="">View</a></button>
                                                     <button>Delete</button>
                                                 </span>
                                             </td>

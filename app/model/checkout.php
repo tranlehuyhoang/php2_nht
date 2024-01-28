@@ -24,7 +24,7 @@ class Checkout
         return $this->db->connection_database();
     }
 
-    public function saveOrder($email, $first_name, $last_name, $company, $address, $phone, $city, $country, $postal_code, $payment)
+    public function saveOrder($email, $first_name, $last_name, $company, $address, $phone, $city, $country, $postal_code, $payment, $total_price)
     {
         try {
             $conn = $this->getConnection();
@@ -32,9 +32,9 @@ class Checkout
             $status = "pending"; // Bạn có thể thiết lập trạng thái khác tùy thuộc vào quy trình của bạn
 
             // Thực hiện insert vào bảng ps_order
-            $stmt = $conn->prepare("INSERT INTO ps_order (email, first_name, last_name, company, address, phone, city, country, postal_code, payment, status, time) 
-                            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-            $stmt->execute([$email, $first_name, $last_name, $company, $address, $phone, $city, $country, $postal_code, $payment, $status, $time]);
+            $stmt = $conn->prepare("INSERT INTO ps_order (email, first_name, last_name, company, address, phone, city, country, postal_code,total_price, payment, status, time) 
+                            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            $stmt->execute([$email, $first_name, $last_name, $company, $address, $phone, $city, $country, $postal_code, $total_price, $payment, $status, $time]);
 
             // Lấy ID đơn hàng vừa thêm vào để làm khóa ngoại trong bảng ps_order_detail
             $order_id = $conn->lastInsertId();

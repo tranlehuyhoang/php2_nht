@@ -9,6 +9,15 @@
                             <div class="section__header checkout__section--header d-flex align-items-center justify-content-between mb-25">
                                 <h2 class="section__header--title h3">Contact information</h2>
                             </div>
+                            <?php if (isset($_SESSION['cart']) && is_array($_SESSION['cart'])) : ?>
+                                <?php $total = 0; ?>
+                                <?php foreach ($_SESSION['cart'] as $cartItem) : ?>
+                                    <?php $total += (float)$cartItem[1] * (float)$cartItem[3]; ?>
+                                <?php endforeach; ?>
+                            <?php else : ?>
+                            <?php endif; ?>
+                            <input type="number" hidden name="total_price" value="<?php echo $total ?>">
+
                             <div class="customer__information">
                                 <div class="checkout__email--phone mb-12">
                                     <label>
@@ -217,7 +226,8 @@
                                 <span class="order__summary--toggle__text show">
                                     <span>Show order summary</span>
                                     <svg width="11" height="6" xmlns="http://www.w3.org/2000/svg" class="order-summary-toggle__dropdown" fill="currentColor">
-                                        <path d="M.504 1.813l4.358 3.845.496.438.496-.438 4.642-4.096L9.504.438 4.862 4.534h.992L1.496.69.504 1.812z"></path>
+                                        <path d="M.504 1.813l4.358 3.845.496.438.496-.438 4.642-4.096L9.504.438 4.862 4.534h.992L1.496.69.504 1.812z">
+                                        </path>
                                     </svg>
                                 </span>
                             </span>
@@ -232,8 +242,10 @@
                                                     <td class=" summary__table--list">
                                                         <div class="product__image two  d-flex align-items-center">
                                                             <div class="product__description">
-                                                                <h3 class="product__description--name h4"><a href="product-details.html"><?php echo $cartItem[2]; ?></a></h3>
-                                                                <span class="product__description--variant" style="color: black">Quantity: <?php echo (int)$cartItem[1]; ?></span>
+                                                                <h3 class="product__description--name h4"><a href="product-details.html"><?php echo $cartItem[2]; ?></a>
+                                                                </h3>
+                                                                <span class="product__description--variant" style="color: black">Quantity:
+                                                                    <?php echo (int)$cartItem[1]; ?></span>
                                                             </div>
                                                         </div>
                                                     </td>
@@ -263,7 +275,8 @@
                                     </tbody>
                                     <tfoot class="checkout__total--footer">
                                         <tr class="checkout__total--footer__items">
-                                            <td class="checkout__total--footer__title checkout__total--footer__list text-left">Total </td>
+                                            <td class="checkout__total--footer__title checkout__total--footer__list text-left">
+                                                Total </td>
                                             <td class="checkout__total--footer__amount checkout__total--footer__list text-right" id="totalCheckout2">$860.00</td>
                                         </tr>
                                     </tfoot>
@@ -277,20 +290,24 @@
                 <div class="cart__table checkout__product--table">
                     <table class="cart__table--inner">
                         <?php if (isset($_SESSION['cart']) && is_array($_SESSION['cart'])) : ?>
+                            <?php $total = 0; ?>
                             <?php foreach ($_SESSION['cart'] as $cartItem) : ?>
+                                <?php $total += (float)$cartItem[1] * (float)$cartItem[3]; ?>
                                 <tbody class="cart__table--body">
                                     <tr class="cart__table--body__items">
                                         <td class="cart__table--body__list">
                                             <div class="product__image two  d-flex align-items-center">
                                                 <div class="product__description">
                                                     <h3 class="product__description--name h4"><a href="#"><?php echo $cartItem[2]; ?></a></h3>
-                                                    <span class="product__description--variant" style="color: black">Quantity: <?php echo (int)$cartItem[1]; ?></span>
+                                                    <span class="product__description--variant" style="color: black">Quantity:
+                                                        <?php echo (int)$cartItem[1]; ?></span>
                                                     <input class="quantity_number" type="hidden" value="<?php echo (int)$cartItem[1]; ?>">
                                                 </div>
                                             </div>
                                         </td>
                                         <td class="cart__table--body__list">
                                             <span class="cart__price"><?php echo '$' . number_format((float)$cartItem[1] * (float)$cartItem[3], 0); ?></span>
+
                                         </td>
                                     </tr>
                                 </tbody>
@@ -314,7 +331,8 @@
                         </tbody>
                         <tfoot class="checkout__total--footer">
                             <tr class="checkout__total--footer__items">
-                                <td class="checkout__total--footer__title checkout__total--footer__list text-left">Total </td>
+                                <td class="checkout__total--footer__title checkout__total--footer__list text-left">Total
+                                </td>
                                 <td class="checkout__total--footer__amount checkout__total--footer__list text-right" id="totalCheckout1">$860.00</td>
                             </tr>
                         </tfoot>
@@ -326,7 +344,7 @@
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function() {
         function updateSubtotalAndTotal() {
             var subtotalElement = document.getElementById('subtotal1');
             var totalElement = document.getElementById('totalCheckout1');
@@ -335,9 +353,10 @@
             var subtotal = 0;
 
             var cartRows = cartTableBody.querySelectorAll('.cart__table--body__items');
-            cartRows.forEach(function (row) {
+            cartRows.forEach(function(row) {
                 var quantity = parseInt(row.querySelector('.quantity_number').value);
-                var price = parseFloat(row.querySelector('.cart__price').textContent.replace('$', '').replace(',', '').replace(',', ''));
+                var price = parseFloat(row.querySelector('.cart__price').textContent.replace('$', '')
+                    .replace(',', '').replace(',', ''));
                 var rowTotal = price;
                 subtotal += rowTotal;
             });
@@ -350,7 +369,7 @@
         }
 
         var quantityInputs = document.querySelectorAll('.quantity_number');
-        quantityInputs.forEach(function (input) {
+        quantityInputs.forEach(function(input) {
             input.addEventListener('input', updateSubtotalAndTotal);
         });
 

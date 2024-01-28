@@ -1,8 +1,6 @@
 
 checkout
 - thông báo mail cả user và admin                                                                                           
-- cập nhật tổng đơn hàng                                                                                           
-- hóa đơn chi tiết                                                                                           
 - phương thức thanh toán                                                                                           
 	+ COD                                                                                           
 	+ Banking Online (gửi qr qua mail user)                                                                                           
@@ -16,12 +14,9 @@ admin
 - giảm số lượng sản phẩm khi user mua hàng                                                                                           
 - thống kê doanh thu, đơn hàng đã bán                                                                                           
                                                                                            
-                                                                  
-admin/edit_user                                                                                           
-- sửa lỗi last name                                                                                           
+                                                                                    
                                                                                            
-admin/order                                                                                           
-- hiển thị các đơn hàng > chi tiết đơn hàng                                                                                           
+                                                                              
                                                                                            
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -63,3 +58,13 @@ cart
 admin/add_product                                                                                           
 - thêm category phần add sản phẩm                                                                                           
                          
+                                                                  
+admin/edit_user                                                                                           
+- sửa lỗi last name       
+admin/order                                                                                           
+- hiển thị các đơn hàng > chi tiết đơn hàng             
+
+checkout
+- cập nhật tổng đơn hàng                                                                                           
+- hóa đơn chi tiết                                                                                           
+ 

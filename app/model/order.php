@@ -7,33 +7,33 @@ use PDOException;
 
 class Order
 {
-    private $db;
+  private $db;
 
-    public function __construct()
-    {
-        $this->db = new database();
-    }
+  public function __construct()
+  {
+    $this->db = new database();
+  }
 
-    private function getConnection()
-    {
-        return $this->db->connection_database();
-    }
+  private function getConnection()
+  {
+    return $this->db->connection_database();
+  }
 
-    public function getAllOrders()
-    {
-        $conn = $this->getConnection();
-        $query = "SELECT * FROM ps_order";
-        $stmt = $conn->prepare($query);
-        $stmt->execute();
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        return $result;
-    }
+  public function getAllOrders()
+  {
+    $conn = $this->getConnection();
+    $query = "SELECT * FROM ps_order";
+    $stmt = $conn->prepare($query);
+    $stmt->execute();
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $result;
+  }
 
-    public function getOrdersByUser($email)
-    {
-        $conn = $this->getConnection();
+  public function getOrdersByUser($email)
+  {
+    $conn = $this->getConnection();
 
-        $query = "
+    $query = "
           SELECT o.*, COUNT(od.quantity) AS total_quantity
           FROM ps_order o
           LEFT JOIN ps_order_detail od ON o.id = od.order_id
@@ -41,32 +41,41 @@ class Order
           GROUP BY o.id
         ";
 
-        $stmt = $conn->prepare($query);
-        $stmt->execute([$email]);
+    $stmt = $conn->prepare($query);
+    $stmt->execute([$email]);
 
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+  }
+  public function getOrderById($orderId)
+  {
+    $conn = $this->getConnection();
 
-    public function getOrderById($orderId)
-    {
-        $conn = $this->getConnection();
+    $query = "
+      SELECT *
+      FROM ps_order
+      WHERE id = :orderId
+    ";
 
-        $query = "
-          SELECT 
-            o.*, 
-            od.product_id, 
-            p.name as product_name,
-            od.quantity, 
-            od.price 
-          FROM ps_order o
-          JOIN ps_order_detail od ON o.id = od.order_id
-          JOIN ps_product p ON p.id = od.product_id
-          WHERE o.id = ?
-        ";
+    $stmt = $conn->prepare($query);
+    $stmt->bindParam(':orderId', $orderId);
+    $stmt->execute();
 
-        $stmt = $conn->prepare($query);
-        $stmt->execute([$orderId]);
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+  }
+  public function getOrderDetailsByOrderId($orderId)
+  {
+    $conn = $this->getConnection();
 
-        return $stmt->fetch(PDO::FETCH_ASSOC);
-    }
+    $query = "
+    SELECT *
+    FROM ps_order_detail
+    WHERE order_id = :orderId
+  ";
+
+    $stmt = $conn->prepare($query);
+    $stmt->bindParam(':orderId', $orderId);
+    $stmt->execute();
+
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+  }
 }
