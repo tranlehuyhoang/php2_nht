@@ -186,14 +186,12 @@ class SanPham
         return $result;
     }
 
-    public function getAllProductss($currentPage, $perPage)
+    public function getAllProductsSearch($searchQuery)
     {
         $conn = $this->getConnection();
-        $offset = ($currentPage - 1) * $perPage;
-        $query = "SELECT * FROM ps_products ORDER BY id DESC LIMIT :offset, :limit";
+        $query = "SELECT * FROM ps_products WHERE name LIKE CONCAT('%', :searchQuery, '%') ORDER BY id DESC";
         $stmt = $conn->prepare($query);
-        $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
-        $stmt->bindParam(':limit', $perPage, PDO::PARAM_INT);
+        $stmt->bindParam(':searchQuery', $searchQuery, PDO::PARAM_STR);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;

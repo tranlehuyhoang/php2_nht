@@ -13,6 +13,8 @@ $router
     //==========================================================================
     //================================CLIENT====================================
     //==========================================================================
+    ->get('/search', [Controller::class, 'search'])
+
     ->get('/', [Controller::class, 'index'])
     ->get('/sendmail', [Controller::class, 'sendMail'])
     ->get('/cua-hang', [Controller::class, 'cuahang'])

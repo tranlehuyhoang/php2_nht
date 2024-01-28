@@ -206,6 +206,20 @@ class Controller
         include "../project_php2_6/app/view/cua-hang.php";
         $this->importFooter();
     }
+    public function search()
+    {
+        $this->importHeader();
+
+        $sanPhamModel = new SanPham();
+
+
+        // Pagination settings
+
+        $products = $sanPhamModel->getAllProductsSearch($_GET['search']);
+
+        include "../project_php2_6/app/view/search.php";
+        $this->importFooter();
+    }
     public function productDetail($product_id)
     {
         session_start();

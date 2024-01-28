@@ -25,7 +25,7 @@
 <body>
     <!-- Start header area -->
     <header class="header__section">
-<a href="/sendmail">mail</a>
+        <a href="/sendmail">mail</a>
         <div class="main__header header__sticky">
             <div class="container-fluid">
                 <div class="main__header--inner position__relative d-flex justify-content-between align-items-center">
@@ -41,14 +41,15 @@
                         <h1 class="main__logo--title"><a class="main__logo--link" href="/"><img class="main__logo--img" src="./app/view/inc/assets/img/logo/nav-log.png" alt="logo-img"></a></h1>
                     </div>
                     <div class="header__search--widget header__sticky--none d-none d-lg-block">
-                        <form class="d-flex header__search--form" action="#">
+                        <form class="d-flex header__search--form" action="./search" method="get">
                             <div class="header__search--box">
                                 <label>
-                                    <input class="header__search--input" placeholder="Search..." type="text">
+                                    <input class="header__search--input" placeholder="Search..." name="search" type="text">
                                 </label>
                                 <button class="header__search--button bg__secondary text-white" type="submit" aria-label="search button">
                                     <svg class="header__search--button__svg" xmlns="http://www.w3.org/2000/svg" width="27.51" height="26.443" viewBox="0 0 512 512">
-                                        <path d="M221.09 64a157.09 157.09 0 10157.09 157.09A157.1 157.1 0 00221.09 64z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"></path>
+                                        <path d="M221.09 64a157.09 157.09 0 10157.09 157.09A157.1 157.1 0 00221.09 64z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32">
+                                        </path>
                                         <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32" d="M338.29 338.29L448 448"></path>
                                     </svg>
                                 </button>
@@ -169,7 +170,8 @@
                             </ul>
                         </nav>
                     </div>
-                    <p class="header__discount--text"><img class="header__discount--icon__img" src="./app/view/inc/assets/img/icon/lamp.png" alt="lamp-img"> Special up to 60% Off all item</p>
+                    <p class="header__discount--text"><img class="header__discount--icon__img" src="./app/view/inc/assets/img/icon/lamp.png" alt="lamp-img"> Special up to 60% Off all item
+                    </p>
                 </div>
             </div>
         </div>
@@ -191,7 +193,8 @@
                         <li class="offcanvas__menu_li">
                             <a class="offcanvas__menu_item" href="/cua-hang">Shop</a>
                         </li>
-                        <li class="offcanvas__menu_li"><a class="offcanvas__menu_item" href="contact.html">Contact</a></li>
+                        <li class="offcanvas__menu_li"><a class="offcanvas__menu_item" href="contact.html">Contact</a>
+                        </li>
                     </ul>
                 </nav>
             </div>

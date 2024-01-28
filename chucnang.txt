@@ -1,13 +1,3 @@
-- tìm kiếm sản phẩm
-
-shop
-- các sản phẩm có hiển thị danh mục
-- option chọn hiển thị sả phẩm theo danh mục
-- pagination
-- min/max mua sản phẩm 1-100
-
-cart
-- cập nhật giỏ hàng
 
 checkout
 - thông báo mail cả user và admin
@@ -34,3 +24,40 @@ admin/edit_user
 
 admin/order
 - hiển thị các đơn hàng > chi tiết đơn hàng
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+                   _ooOoo_
+                  o8888888o
+                  88" . "88
+                  (| -_- |)
+                  O\  =  /O
+               ____/`---'\____
+             .'  \\|     |//  `.
+            /  \\|||  :  |||//  \
+           /  _||||| -:- |||||-  \
+           |   | \\\  -  /// |   |
+           | \_|  ''\---/''  |   |
+           \  .-\__  `-`  ___/-. /
+         ___`. .'  /--.--\  `. . __
+      ."" '<  `.___\_<|>_/___.'  >'"".
+     | | :  `- \`.;`\ _ /`;.`/ - ` : | |
+     \  \ `-.   \_ __\ /__ _/   .-` /  /
+======`-.____`-.___\_____/___.-`____.-'======
+                   `=---='
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+       PHẬT ĐỘ   KHÔNG LỖI   KHÔNG BUG
+              VUONG THANH DIEU
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+
+- tìm kiếm sản phẩm
+
+shop  
+- các sản phẩm có hiển thị danh mục
+- option chọn hiển thị sả phẩm theo danh mục
+- pagination
+- min/max mua sản phẩm 1-100
+
+cart
+- cập nhật giỏ hàng
