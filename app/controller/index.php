@@ -387,6 +387,11 @@ class Controller
         session_start();
         $this->importHeader();
         $user = $_SESSION['user'];
+        $userModel = new User();
+        $users = $userModel->getLatestUsers(10);
+        $orderModel = new Order();
+        $orders = $orderModel->getLatestOrders(10);
+        $orderss = $orderModel->getAllOrders();
         if ($user['is_admin'] == 1) {
             include "../project_php2_6//app/view/admin/index.php";
         } else {

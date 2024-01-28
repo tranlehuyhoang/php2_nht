@@ -82,7 +82,16 @@ class User
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
-
+    public function getLatestUsers($limit)
+    {
+        $conn = $this->getConnection();
+        $query = "SELECT * FROM ps_user ORDER BY id DESC LIMIT :limit";
+        $stmt = $conn->prepare($query);
+        $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
     public function adminUpdateUser($id, $name, $first_name, $last_name, $age, $company, $email, $password, $address, $address2, $phone, $city, $country, $postal_code, $is_admin)
     {
         $conn = $this->getConnection();

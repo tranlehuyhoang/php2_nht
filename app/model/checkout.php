@@ -39,7 +39,7 @@ class Checkout
             // Lấy ID đơn hàng vừa thêm vào để làm khóa ngoại trong bảng ps_order_detail
             $order_id = $conn->lastInsertId();
 
-            // Lưu thông tin chi tiết đơn hàng từ localStorage vào bảng ps_order_detail
+            // Lưu thông tin chi tiết đơn hàng từ localStorage vào bảng ps_order_detail và giảm số lượng sản phẩm
             $cartItems = $_SESSION['cart'] ?? [];
             if (is_array($cartItems)) {
                 foreach ($cartItems as $item) {
@@ -50,6 +50,12 @@ class Checkout
                     // Thực hiện insert vào bảng ps_order_detail
                     $stmt = $conn->prepare("INSERT INTO ps_order_detail (order_id, product_id, quantity, product_price) VALUES (?, ?, ?, ?)");
                     $stmt->execute([$order_id, $product_id, $quantity, $product_price]);
+
+                    // Giảm số lượng sản phẩm trong bảng ps_products
+                    $stmt = $conn->prepare("UPDATE ps_products SET quantity = quantity - :quantity WHERE id = :product_id");
+                    $stmt->bindValue(':quantity', $quantity, PDO::PARAM_INT);
+                    $stmt->bindValue(':product_id', $product_id, PDO::PARAM_INT);
+                    $stmt->execute();
                 }
             } else {
                 echo "Không lấy được key cart";

@@ -28,7 +28,16 @@ class Order
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     return $result;
   }
-
+  public function getLatestOrders($limit)
+  {
+    $conn = $this->getConnection();
+    $query = "SELECT * FROM ps_order ORDER BY id DESC LIMIT :limit";
+    $stmt = $conn->prepare($query);
+    $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+    $stmt->execute();
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $result;
+  }
   public function getOrdersByUser($email)
   {
     $conn = $this->getConnection();
