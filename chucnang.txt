@@ -1,0 +1,36 @@
+- tìm kiếm sản phẩm
+
+shop
+- các sản phẩm có hiển thị danh mục
+- option chọn hiển thị sả phẩm theo danh mục
+- pagination
+- min/max mua sản phẩm 1-100
+
+cart
+- cập nhật giỏ hàng
+
+checkout
+- thông báo mail cả user và admin
+- cập nhật tổng đơn hàng
+- hóa đơn chi tiết
+- phương thức thanh toán
+	+ COD
+	+ Banking Online (gửi qr qua mail user)
+
+tai-khoan/information
+- cập nhật các thông tin của user
+- quên mật khẩu
+
+admin
+- hiển thị 10 user mới đăng kí tài khoản, 10 đơn hàng mới nhất
+- giảm số lượng sản phẩm khi user mua hàng
+- thống kê doanh thu, đơn hàng đã bán
+
+admin/add_product
+- thêm category phần add sản phẩm
+
+admin/edit_user
+- sửa lỗi last name
+
+admin/order
+- hiển thị các đơn hàng > chi tiết đơn hàng

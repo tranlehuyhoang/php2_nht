@@ -1,0 +1,135 @@
+<head>
+    <meta charset="utf-8">
+    <title>Suruchi - Fashion eCommerce HTML Template</title>
+    <meta name="description" content="Morden Bootstrap HTML5 Template">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/x-icon" href="./../app/view/inc/assets/img/favicon.ico">
+
+    <!-- ======= All CSS Plugins here ======== -->
+    <link rel="stylesheet" href="./../app/view/inc/assets/css/plugins/swiper-bundle.min.css">
+    <link rel="stylesheet" href="./../app/view/inc/assets/css/plugins/glightbox.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+    <!-- Plugin css -->
+    <link rel="stylesheet" href="./../app/view/inc/assets/css/vendor/bootstrap.min.css">
+
+    <!-- Custom Style CSS -->
+    <link rel="stylesheet" href="./../app/view/inc/assets/css/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+</head>
+
+<main class="main__content_wrapper">
+    <!-- Start breadcrumb section -->
+    <section class="breadcrumb__section">
+    </section>
+    <!-- End breadcrumb section -->
+
+    <!-- my account section start -->
+    <section class="my__account--section section--padding">
+        <div class="container">
+            <!-- <p class="account__welcome--text">Hello, Admin welcome to your dashboard!</p> -->
+            <div class="my__account--section__inner border-radius-10 d-flex">
+                <div class="account__left--sidebar">
+                    <?php
+                    if (isset($_SESSION['user'])) {
+                        $user = $_SESSION['user'];
+                        echo '<h2 class="account__content--title h3 mb-20">Admin ' . $user['name'] . '</h2>';
+                    }
+                    ?>
+                    <ul class="account__menu">
+                        <li class="account__menu--list"><a href="/admin">Dashboard</a></li>
+                        <li class="account__menu--list active"><a href="/admin/categories">Categories</a></li>
+                        <li class="account__menu--list"><a href="/admin/products">Products</a></li>
+                        <li class="account__menu--list"><a href="/admin/users">Users</a></li>
+                        <li class="account__menu--list"><a href="/admin/orders">Orders</a></li>
+                        <hr>
+                        <?php
+                        // Kiểm tra xem có thông tin người dùng trong session hay không
+                        if (isset($_SESSION['user'])) {
+                            $user = $_SESSION['user'];
+                            echo '<a href="/logout" class="account__menu--list">Log Out</a>';
+                        } else {
+                            echo '<p class="account__welcome--text">Vui lòng đăng nhập để xem thông tin tài khoản của bạn.</p>';
+                        }
+                        ?>
+                    </ul>
+                </div>
+                <div class="account__wrapper">
+                    <div class="account__content">
+                        <h2 class="account__content--title h3 mb-20">List Categories | <em><a href="/admin/add_category">Add Category</a></em></h2>
+                        <div class="account__table--area">
+                            <table class="account__table">
+                                <thead class="account__table--header">
+                                    <tr class="account__table--header__child">
+                                        <th class="account__table--header__child--items">#</th>
+                                        <th class="account__table--header__child--items">ID</th>
+                                        <th class="account__table--header__child--items">Nane</th>
+                                        <th class="account__table--header__child--items">Slug</th>
+                                        <th class="account__table--header__child--items">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="account__table--body mobile__none">
+                                    <?php
+                                    $stt = 1;
+                                    foreach ($categories as $category) :
+                                    ?>
+                                        <tr class="account__table--body__child">
+                                            <td class="account__table--body__child--items">#<?php echo $stt; ?></td>
+                                            <td class="account__table--body__child--items"><?php echo $category['id']; ?></td>
+                                            <td class="account__table--body__child--items"><?php echo $category['name']; ?></td>
+                                            <td class="account__table--body__child--items"><?php echo $category['slug']; ?></td>
+                                            <td class="account__table--body__child--items">
+                                                <a href="/admin/edit_category?id=<?php echo $category['id']; ?>"><button class="primary__btn">Edit</button></a>
+                                                <a href="/admin/delete_category?id=<?php echo $category['id']; ?>" onclick="return confirm('Bạn có chắc muốn xóa category này không?')"><button class="primary__btn">Delete</button></a>
+                                            </td>
+                                        </tr>
+                                    <?php
+                                        $stt++;
+                                    endforeach;
+                                    ?>
+                                </tbody>
+                                <tbody class="account__table--body mobile__block">
+                                    <?php
+                                    $stt = 1;
+                                    foreach ($categories as $category) :
+                                    ?>
+                                        <tr class="account__table--body__child">
+                                            <td class="account__table--body__child--items">
+                                                <strong>#</strong>
+                                                <span>#<?php echo $stt; ?></span>
+                                            </td>
+                                            <td class="account__table--body__child--items">
+                                                <strong>ID</strong>
+                                                <span><?php echo $category['id']; ?></span>
+                                            </td>
+                                            <td class="account__table--body__child--items">
+                                                <strong>Name</strong>
+                                                <span><?php echo $category["name"] ?></span>
+                                            </td>
+                                            <td class="account__table--body__child--items">
+                                                <strong>Slug</strong>
+                                                <span><?php echo $category["slug"] ?></span>
+                                            </td>
+                                            <td class="account__table--body__child--items">
+                                                <strong>Action</strong>
+                                                <span>
+                                                    <button>Edit</button>
+                                                    <button>Delete</button>
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    <?php
+                                        $stt++;
+                                    endforeach;
+                                    ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- my account section end -->
+</main>
