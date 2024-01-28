@@ -181,15 +181,26 @@ class Controller
     public function cuahang()
     {
         $this->importHeader();
+
         $sanPhamModel = new SanPham();
         $CategoryModel = new Category();
         $categories = $CategoryModel->getAllCategories();
 
+        // Pagination settings
+        $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
+        $perPage = 3; // Number of products per page
+
         if (isset($_GET['category'])) {
             $categoryId = $_GET['category'];
-            $products = $sanPhamModel->getProductsByCategory($categoryId);
+            $totalProducts = $sanPhamModel->getTotalProductsByCategory($categoryId);
+            $totalPages = ceil($totalProducts / $perPage);
+
+            $products = $sanPhamModel->getProductsByCategorys($categoryId, $currentPage, $perPage);
         } else {
-            $products = $sanPhamModel->getAllProducts();
+            $totalProducts = $sanPhamModel->getTotalProducts();
+            $totalPages = ceil($totalProducts / $perPage);
+
+            $products = $sanPhamModel->getAllProductss($currentPage, $perPage);
         }
 
         include "../project_php2_6/app/view/cua-hang.php";

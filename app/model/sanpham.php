@@ -161,4 +161,50 @@ class SanPham
             throw $e;
         }
     }
+    public function getTotalProductsByCategory($categoryId)
+    {
+        $conn = $this->getConnection();
+        $query = "SELECT COUNT(*) AS total FROM ps_products WHERE category_id = :category_id";
+        $stmt = $conn->prepare($query);
+        $stmt->bindParam(':category_id', $categoryId, PDO::PARAM_INT);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['total'];
+    }
+
+    public function getProductsByCategorys($categoryId, $currentPage, $perPage)
+    {
+        $conn = $this->getConnection();
+        $offset = ($currentPage - 1) * $perPage;
+        $query = "SELECT * FROM ps_products WHERE category_id = :category_id ORDER BY id DESC LIMIT :offset, :limit";
+        $stmt = $conn->prepare($query);
+        $stmt->bindParam(':category_id', $categoryId, PDO::PARAM_INT);
+        $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
+        $stmt->bindParam(':limit', $perPage, PDO::PARAM_INT);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    public function getAllProductss($currentPage, $perPage)
+    {
+        $conn = $this->getConnection();
+        $offset = ($currentPage - 1) * $perPage;
+        $query = "SELECT * FROM ps_products ORDER BY id DESC LIMIT :offset, :limit";
+        $stmt = $conn->prepare($query);
+        $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
+        $stmt->bindParam(':limit', $perPage, PDO::PARAM_INT);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+    public function getTotalProducts()
+    {
+        $conn = $this->getConnection();
+        $query = "SELECT COUNT(*) AS total FROM ps_products";
+        $stmt = $conn->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['total'];
+    }
 }
