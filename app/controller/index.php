@@ -54,6 +54,7 @@ class Controller
         if (isset($_SESSION['user'])) {
             $email = $_SESSION['user']['email'];
             $orderModel = new Order();
+
             $orders = $orderModel->getOrdersByUser($email);
             // Nếu có, hiển thị trang "Tài Khoản" với thông tin người dùng
             $this->importHeader();
@@ -64,7 +65,53 @@ class Controller
             exit();
         }
     }
+    public function information()
+    {
+        session_start();
 
+        // Kiểm tra xem có session người dùng hay không
+        if (isset($_SESSION['user'])) {
+            $email = $_SESSION['user']['email'];
+            $UserModel = new User();
+            $users = $UserModel->getUserByEmail($email);
+            // print_r($users);
+            // Nếu có, hiển thị trang "Tài Khoản" với thông tin người dùng
+            $this->importHeader();
+            include "../project_php2_6/app/view/information.php";
+            $this->importFooter();
+        } else {
+            header("Location: /login");
+            exit();
+        }
+    }
+    public function information_update()
+    {
+        session_start();
+
+        // Kiểm tra xem có session người dùng hay không
+
+        // Lấy các biến từ $_POST
+        $id = $_POST['id'];
+        $name = $_POST['name'];
+        $first_name = $_POST['first_name'];
+        $last_name = $_POST['last_name'];
+        $email = $_POST['email'];
+        $address = $_POST['address'];
+        $address2 = $_POST['address2'];
+        $phone = $_POST['phone'];
+        $city = $_POST['city'];
+        $country = $_POST['country'];
+        $age = $_POST['age'];
+        $postal_code = $_POST['postal_code'];
+        $company = $_POST['company'];
+
+        $UserModel = new User();
+        $user = $UserModel->updateUser($id, $name, $first_name, $last_name, $email, $address, $address2, $phone, $city, $country, $postal_code, $age, $company);
+        // Nếu có, hiển thị trang "Tài Khoản" với thông tin người dùng
+        $this->importHeader();
+        include "../project_php2_6/app/view/information.php";
+        $this->importFooter();
+    }
     public function login()
     {
         $this->importHeader();

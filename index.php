@@ -20,6 +20,8 @@ $router
     ->get('/cua-hang', [Controller::class, 'cuahang'])
     ->get('/san-pham', [Controller::class, 'productDetail'])
     ->get('/tai-khoan', [Controller::class, 'taikhoan'])
+    ->get('/information', [Controller::class, 'information'])
+    ->post('/information', [Controller::class, 'information_update'])
     ->get('/login', [Controller::class, 'login'])
     ->post('/loginUser', [Controller::class, 'loginUser'])
     ->get('/register', [Controller::class, 'register'])

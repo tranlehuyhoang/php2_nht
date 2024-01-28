@@ -5,9 +5,7 @@ checkout
 	+ COD                                                                                           
 	+ Banking Online (gửi qr qua mail user)                                                                                           
                                                                                            
-tai-khoan/information                                                                                           
-- cập nhật các thông tin của user                                                                                           
-- quên mật khẩu                                                                                           
+                                                                                    
                                                                                            
                                         
                                                                                     
@@ -69,3 +67,5 @@ checkout
 - giảm số lượng sản phẩm khi user mua hàng                                                                                           
 - thống kê doanh thu, đơn hàng đã bán                                                                                           
                                                    
+tai-khoan/information                                                                                           
+- cập nhật các thông tin của user                                                                                           

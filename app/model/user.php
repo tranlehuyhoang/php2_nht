@@ -72,7 +72,31 @@ class User
         header("Location: /?registerSuccess=1");
         exit();
     }
+    public function updateUser($id, $name, $first_name, $last_name, $email, $address, $address2, $phone, $city, $country, $postal_code, $age, $company)
+    {
+        $conn = $this->getConnection();
 
+        $query = "UPDATE ps_user SET name = :name, first_name = :first_name, last_name = :last_name, email = :email, address = :address, address2 = :address2, phone = :phone, city = :city, country = :country, postal_code = :postal_code, age = :age, company = :company  WHERE id = :id";
+        $stmt = $conn->prepare($query);
+        $stmt->bindParam(':name', $name, PDO::PARAM_STR);
+        $stmt->bindParam(':first_name', $first_name, PDO::PARAM_STR);
+        $stmt->bindParam(':last_name', $last_name, PDO::PARAM_STR);
+        $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+        $stmt->bindParam(':address', $address, PDO::PARAM_STR);
+        $stmt->bindParam(':address2', $address2, PDO::PARAM_STR);
+        $stmt->bindParam(':phone', $phone, PDO::PARAM_STR);
+        $stmt->bindParam(':city', $city, PDO::PARAM_STR);
+        $stmt->bindParam(':country', $country, PDO::PARAM_STR);
+        $stmt->bindParam(':postal_code', $postal_code, PDO::PARAM_STR);
+        $stmt->bindParam(':age', $age, PDO::PARAM_STR);
+        $stmt->bindParam(':company', $company, PDO::PARAM_STR);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+
+        $stmt->execute();
+
+        header("Location: /?updateSuccess=1");
+        exit();
+    }
     public function getAllUsersDesc()
     {
         $conn = $this->getConnection();
