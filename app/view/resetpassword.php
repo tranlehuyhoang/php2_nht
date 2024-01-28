@@ -22,9 +22,8 @@
                     <h2 class="account__content--title h3 mb-20">My Profile</h2>
                     <ul class="account__menu">
                         <li class="account__menu--list "><a href="/tai-khoan">Dashboard</a></li>
-                        <li class="account__menu--list active"><a href="/information">Information</a></li>
-                        <li class="account__menu--list "><a href="/reset-password">Reset Password</a></li>
-
+                        <li class="account__menu--list"><a href="/information">Information</a></li>
+                        <li class="account__menu--list active"><a href="/reset-password">Reset Password</a></li>
                         <hr>
                         <?php
                         if (isset($_SESSION['user']) && $users['is_admin'] == 1) {
@@ -47,33 +46,15 @@
                 </div>
                 <div class="account__wrapper">
                     <div class="account__content">
-                        <form method="POST" action="./information" enctype="multipart/form-data">
-                            <label for="name">Name:</label>
-                            <input type="hidden" name="id" value="<?php echo $users['id']; ?>">
-                            <input type="text" name="name" id="name" value="<?php echo $users['name']; ?>">
-                            <label for="first_name">First Name:</label>
-                            <input type="text" name="first_name" id="first_name" value="<?php echo $users['first_name']; ?>">
-                            <label for="last_name">Last Name:</label>
-                            <input type="text" name="last_name" id="last_name" value="<?php echo $users['last_name']; ?>">
-                            <label for="age">Age:</label>
-                            <input type="text" name="age" id="age" value="<?php echo $users['age']; ?>">
-                            <label for="company">Company:</label>
-                            <input type="text" name="company" id="company" value="<?php echo $users['company']; ?>">
-                            <label for="email">Email:</label>
-                            <input type="email" name="email" id="email" value="<?php echo $users['email']; ?>">
-                            <label for="address">Address:</label>
-                            <input type="text" name="address" id="address" value="<?php echo $users['address']; ?>">
-                            <label for="address2">Address 2:</label>
-                            <input type="text" name="address2" id="address2" value="<?php echo $users['address2']; ?>">
-                            <label for="phone">Phone:</label>
-                            <input type="text" name="phone" id="phone" value="<?php echo $users['phone']; ?>">
-                            <label for="city">City:</label>
-                            <input type="text" name="city" id="city" value="<?php echo $users['city']; ?>">
-                            <label for="country">Country:</label>
-                            <input type="text" name="country" id="country" value="<?php echo $users['country']; ?>">
-                            <label for="postal_code">Postal Code:</label>
-                            <input type="text" name="postal_code" id="postal_code" value="<?php echo $users['postal_code']; ?>">
+                        <form method="POST" action="./reset-password" enctype="multipart/form-data">
+                            <label for="current_password">Current Password:</label>
+                            <input type="password" name="current_password" id="current_password" required>
 
+                            <label for="new_password">New Password:</label>
+                            <input type="password" name="new_password" id="new_password" required>
+
+                            <label for="confirm_password">Confirm Password:</label>
+                            <input type="password" name="confirm_password" id="confirm_password" required>
 
                             <button type="submit">Save</button>
                         </form>

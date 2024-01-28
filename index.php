@@ -22,6 +22,8 @@ $router
     ->get('/tai-khoan', [Controller::class, 'taikhoan'])
     ->get('/information', [Controller::class, 'information'])
     ->post('/information', [Controller::class, 'information_update'])
+    ->get('/reset-password', [Controller::class, 'reset_password'])
+    ->post('/reset-password', [Controller::class, 'update_password'])
     ->get('/login', [Controller::class, 'login'])
     ->post('/loginUser', [Controller::class, 'loginUser'])
     ->get('/register', [Controller::class, 'register'])

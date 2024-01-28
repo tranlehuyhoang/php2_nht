@@ -23,6 +23,8 @@
                     <ul class="account__menu">
                         <li class="account__menu--list active"><a href="/tai-khoan">Dashboard</a></li>
                         <li class="account__menu--list"><a href="/information">Information</a></li>
+                        <li class="account__menu--list "><a href="/reset-password">Reset Password</a></li>
+
                         <hr>
                         <?php
                         if (isset($_SESSION['user']) && $user['is_admin'] == 1) {
@@ -63,9 +65,12 @@
                                         <tr class="account__table--body__child">
                                             <td class="account__table--body__child--items">#<?php echo $order['id'] ?></td>
                                             <td class="account__table--body__child--items"><?php echo $order['time'] ?></td>
-                                            <td class="account__table--body__child--items"><?php echo $order['payment'] ?></td>
-                                            <td class="account__table--body__child--items"><?php echo $order['status'] ?></td>
-                                            <td class="account__table--body__child--items"><?php echo $order['total_price'] ?></td>
+                                            <td class="account__table--body__child--items"><?php echo $order['payment'] ?>
+                                            </td>
+                                            <td class="account__table--body__child--items"><?php echo $order['status'] ?>
+                                            </td>
+                                            <td class="account__table--body__child--items">
+                                                <?php echo $order['total_price'] ?></td>
                                             <td class="account__table--body__child--items">
                                                 <a href="/order_detail?id=<?php echo $order['id'] ?>"><button class="primary__btn">Detail</button></a>
                                             </td>

@@ -5,9 +5,7 @@ checkout
 	+ COD                                                                                           
 	+ Banking Online (gửi qr qua mail user)                                                                                           
                                                                                            
-                                                                                    
-                                                                                           
-                                        
+                   
                                                                                     
                                                                                            
                                                                               
@@ -69,3 +67,6 @@ checkout
                                                    
 tai-khoan/information                                                                                           
 - cập nhật các thông tin của user                                                                                           
+- Đổi mật khẩu                                                                   
+                                                                                           
+                     

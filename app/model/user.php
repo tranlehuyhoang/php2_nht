@@ -72,6 +72,17 @@ class User
         header("Location: /?registerSuccess=1");
         exit();
     }
+    public function updatePasswordByEmail($email, $password)
+    {
+        $conn = $this->getConnection();
+
+        $query = "UPDATE ps_user SET password = :password WHERE email = :email";
+        $stmt = $conn->prepare($query);
+        $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+        $stmt->bindParam(':password', $password, PDO::PARAM_STR);
+
+        $stmt->execute();
+    }
     public function updateUser($id, $name, $first_name, $last_name, $email, $address, $address2, $phone, $city, $country, $postal_code, $age, $company)
     {
         $conn = $this->getConnection();

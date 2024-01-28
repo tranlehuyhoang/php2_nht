@@ -84,6 +84,57 @@ class Controller
             exit();
         }
     }
+    public function reset_password()
+    {
+        session_start();
+        $email = $_SESSION['user']['email'];
+        $UserModel = new User();
+        $users = $UserModel->getUserByEmail($email);
+        // Kiểm tra xem có session người dùng hay không
+
+        $this->importHeader();
+        include "../project_php2_6/app/view/resetpassword.php";
+        $this->importFooter();
+    }
+    public function update_password()
+    {
+        session_start();
+        $email = $_SESSION['user']['email'];
+        $UserModel = new User();
+        $users = $UserModel->getUserByEmail($email);
+        // Kiểm tra xem có session người dùng hay không
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Lấy giá trị từ $_POST
+            $current_password = $_POST['current_password'];
+            $new_password = $_POST['new_password'];
+            $confirm_password = $_POST['confirm_password'];
+
+            // Kiểm tra mật khẩu hiện tại có khớp với mật khẩu trong cơ sở dữ liệu hay không
+            if (password_verify($current_password, $users['password'])) {
+                // Kiểm tra mật khẩu mới và xác nhận mật khẩu có khớp nhau
+                if ($new_password === $confirm_password) {
+                    // Cập nhật mật khẩu mới
+                    $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
+                    $UserModel->updatePasswordByEmail($email, $hashed_password);
+
+                    // Redirect hoặc hiển thị thông báo cập nhật thành công
+                    header("Location: /?resetSuccess=1");
+                    exit();
+                } else {
+                    // Hiển thị thông báo lỗi: Mật khẩu mới và xác nhận mật khẩu không khớp
+                    $error_message = "New password and confirm password do not match.";
+                }
+            } else {
+                // Hiển thị thông báo lỗi: Mật khẩu hiện tại không chính xác
+                $error_message = "Current password is incorrect.";
+            }
+        }
+
+        $this->importHeader();
+        include "../project_php2_6/app/view/resetpassword.php";
+        $this->importFooter();
+    }
     public function information_update()
     {
         session_start();
