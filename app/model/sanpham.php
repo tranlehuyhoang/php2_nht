@@ -124,17 +124,18 @@ class SanPham
         }
     }
 
-    public function adminUpdateProduct($id, $name, $price, $quantity, $image, $shortDesc, $longDesc)
+    public function adminUpdateProduct($id, $name, $price, $quantity, $image, $shortDesc, $longDesc, $category_id)
     {
         $conn = $this->getConnection();
         $query = "UPDATE ps_products 
-              SET name = :name, price = :price, quantity = :quantity, image = :image, short_desc = :short_desc, long_desc = :long_desc
-              WHERE id = :id";
+                  SET name = :name, price = :price, quantity = :quantity, image = :image, short_desc = :short_desc, long_desc = :long_desc, category_id = :category_id
+                  WHERE id = :id";
         $stmt = $conn->prepare($query);
         $stmt->bindValue(':id', $id, PDO::PARAM_INT);
         $stmt->bindValue(':name', $name, PDO::PARAM_STR);
         $stmt->bindValue(':price', $price, PDO::PARAM_STR);
         $stmt->bindValue(':quantity', $quantity, PDO::PARAM_INT);
+        $stmt->bindValue(':category_id', $category_id, PDO::PARAM_INT);
         $stmt->bindValue(':image', $image, PDO::PARAM_STR);
         $stmt->bindValue(':short_desc', $shortDesc, PDO::PARAM_STR);
         $stmt->bindValue(':long_desc', $longDesc, PDO::PARAM_STR);
@@ -204,5 +205,17 @@ class SanPham
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         return $result['total'];
+    }
+    public function getAllProductss($currentPage, $perPage)
+    {
+        $conn = $this->getConnection();
+        $offset = ($currentPage - 1) * $perPage;
+        $query = "SELECT * FROM ps_products ORDER BY id DESC LIMIT :offset, :limit";
+        $stmt = $conn->prepare($query);
+        $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
+        $stmt->bindParam(':limit', $perPage, PDO::PARAM_INT);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
     }
 }

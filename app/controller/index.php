@@ -527,7 +527,12 @@ class Controller
         // Lấy thông tin sản phẩm từ cơ sở dữ liệu dựa trên ID
         $id = $_GET['id'];
         $sanPhamModel = new SanPham();
+        $CategoryModel = new Category();
+
         $product = $sanPhamModel->getProductById($id);
+        $categories = $CategoryModel->getAllCategories();
+
+        // print_r($product);
         include "../project_php2_6/app/view/admin/edit_product.php";
         $this->importFooter();
     }
@@ -542,6 +547,7 @@ class Controller
             $price = $_POST['price'];
             $quantity = $_POST['quantity'];
             $shortDesc = $_POST['short_desc'];
+            $category_id = $_POST['category'];
             $longDesc = $_POST['long_desc'];
             $imageSource = $_POST['image_source'];
             $keepCurrentImage = isset($_POST['keep_current_image']) && $_POST['keep_current_image'] == "1";
@@ -560,7 +566,7 @@ class Controller
             }
 
             $productModel = new SanPham();
-            $productModel->adminUpdateProduct($id, $name, $price, $quantity, $image, $shortDesc, $longDesc);
+            $productModel->adminUpdateProduct($id, $name, $price, $quantity, $image, $shortDesc, $longDesc, $category_id);
 
             $encodedId = urlencode($id);
             header("Location: /admin/edit_product?id=$encodedId");

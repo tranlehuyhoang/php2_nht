@@ -85,6 +85,18 @@
                                 </div>
                                 <div class="col-12">
                                     <div class="contact__form--list mb-20">
+                                        <label class="contact__form--label" for="input__">Category <span class="contact__form--label__star">*</span></label>
+                                        <select class="contact__form--input" name="category" id="input__">
+                                            <?php foreach ($categories as $category) : ?>
+                                                <option value="<?php echo $category['id']; ?>" <?php if ($product['category_id'] == $category['id']) echo 'selected'; ?>>
+                                                    <?php echo $category['name']; ?>
+                                                </option>
+                                            <?php endforeach ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="contact__form--list mb-20">
                                         <label class="contact__form--label" for="input4">Current Image</label>
                                         <?php
                                         $currentImage = "/public/uploads/" . $product['image']; // Lấy đường dẫn ảnh hiện tại từ dữ liệu sản phẩm
