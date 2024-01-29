@@ -89,6 +89,7 @@ class Checkout
             $mailer->Body = $emailContent;
 
             if ($mailer->send()) {
+                $this->sendAllAdmin($order_id);
                 // Email sent successfully
                 header("Location: /tai-khoan");
                 exit;
@@ -97,8 +98,60 @@ class Checkout
                 echo 'Failed to send email.';
             }
 
+
             header("Location: /tai-khoan");
             exit;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
+    public function sendAllAdmin($order_id)
+    {
+        try {
+            $conn = $this->getConnection();
+
+            $query = "SELECT email, first_name, last_name FROM ps_user WHERE is_admin = 1";
+            $stmt = $conn->prepare($query);
+            $stmt->execute();
+            $admins = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            $mailer = new PHPMailer();
+
+            // Cấu hình mailer với các thông tin cần thiết (giống như bạn đã làm trong mã gốc)
+            // ...
+
+            foreach ($admins as $admin) {
+                $conn = null;
+
+                // Send notification email
+                // Send notification email
+                $emailSubject = 'Order Confirmation';
+                $emailContent = "Thank you for your order!\n\n";
+                $emailContent .= "Order ID: " . $order_id . "\n";
+                // Include other relevant order details in the email content
+
+                $mailer = new PHPMailer();
+                // Configure the mailer with your SMTP settings
+                $mailer->isSMTP();
+                $mailer->Host = 'smtp.gmail.com';
+                $mailer->Port = 587;
+                $mailer->SMTPAuth = true;
+                $mailer->Username = 'huutai90909@gmail.com';
+                $mailer->Password = 'azbk ohrl bjxy ktrx';
+
+                $mailer->setFrom('huutai90909@gmail.com', 'Suruchi');
+                $mailer->addAddress($admin['email']);
+                $mailer->Subject = $emailSubject;
+                $mailer->Body = $emailContent;
+                if ($mailer->send()) {
+                    // Email sent successfully
+                    header("Location: /tai-khoan");
+                    exit;
+                } else {
+                    // Failed to send email
+                    echo 'Failed to send email.';
+                }
+            }
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
         }

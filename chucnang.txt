@@ -1,9 +1,5 @@
 
-checkout
-- thông báo mail cả user và admin                                                                                           
-- phương thức thanh toán                                                                                           
-	+ COD                                                                                           
-	+ Banking Online (gửi qr qua mail user)                                                                                           
+                                             
                                                                                            
                    
                                                                                     
@@ -69,4 +65,10 @@ tai-khoan/information
 - cập nhật các thông tin của user                                                                                           
 - Đổi mật khẩu                                                                   
                                                                                            
-                     
+
+checkout
+- thông báo mail cả user và admin                                                                                           
+- phương thức thanh toán                                                                                           
+	+ COD                                                                                           
+	+ Banking Online (gửi qr qua mail user)         
+                                          
